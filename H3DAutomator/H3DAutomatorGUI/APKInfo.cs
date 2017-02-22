@@ -30,73 +30,41 @@ class APKInfo
         XDocument doc = XDocument.Load(reader);
 
         // get packge info
-        var attributes = doc.Root.Attributes();
-        foreach (var attribute in attributes) {
-            if (attribute.Name.LocalName == "versionCode") {
-                info.VersionCode = attribute.Value.ToString();
-            } else if (attribute.Name.LocalName == "versionName") {
-                info.VersionName = attribute.Value.ToString();
-            } else if (attribute.Name.LocalName == "package") {
-                info.PackgeName = attribute.Value.ToString();
-            }
-        }
+        info.VersionCode = doc.Root.FindAttribute("versionCode").Value.ToString();
+        info.VersionName = doc.Root.FindAttribute("versionName").Value.ToString();
+        info.PackgeName = doc.Root.FindAttribute("package").Value.ToString();
 
-        // find application element
-        var app = doc.Root.Elements().Single((elm) => {
-            return elm.Name.LocalName == "application";
-        });
-        // find launch activity
+        var application = doc.Root.FindSingleElement("application");
 
-        var activity = app.Elements().Single((elm) => {
-            if (elm.Name.LocalName == "activity") {
-                var intent_filter = elm.Elements().Single((intent)=> {
-                    
-                    if (intent.Name.LocalName == "intent-filter") {
-                        // 1. find android.intent.action.MAIN
-                        var intent_action_main = intent.Elements().Any((intent_elm) => {
-                            if (intent_elm.Name.LocalName == "action") {
-                                var actionMain = intent_elm.Attributes().Single((intent_elm_att) => {
-                                    if (intent_elm_att.Name.LocalName == "name") {
-                                        if (intent_elm_att.Value.ToString() == "android.intent.action.MAIN") {
-                                            return true;
-                                        }
-                                    }
-                                    return false;
-                                });
-                                if (actionMain != null) return true;
-                            }
-                            return false;
-                        });
-                        // 2.find android.intent.category.LAUNCHER
-                        var intent_launcher = intent.Elements().Any((intent_elm) => {
-                            if (intent_elm.Name.LocalName == "category") {
-                                var actionMain = intent_elm.Attributes().Single((intent_elm_att) => {
-                                    if (intent_elm_att.Name.LocalName == "name") {
-                                        if (intent_elm_att.Value.ToString() == "android.intent.category.LAUNCHER") {
-                                            return true;
-                                        }
-                                    }
-                                    return false;
-                                });
-                                if (actionMain != null) return true;
-                            }
-                            return false;
-                        });
+        var activities = application.FindElements("activity");
 
-                        if (intent_action_main  && intent_launcher ) return true;
-                    }
+        var launchActivity = activities.Single((activity)=> {
 
-                    return false;
-                });
+            var intent_filter = activity.FindSingleElement("intent-filter");
+            if (intent_filter == null) return false;
 
-                if (intent_filter != null) {
-                    return true;
-                }
-            }
-            return false;
+            // 是否存在 <action p1:name="android.intent.action.MAIN"></action>
+
+            bool hasActionMain = intent_filter.FindElements("action").Any((ele)=> {
+                string actionName = ele.FindAttribute("name").Value.ToString();
+                return actionName == "android.intent.action.MAIN";
+            });
+
+            // 是否存在 <category p1:name="android.intent.category.LAUNCHER"></category>
+            bool hasLauncher = intent_filter.FindElements("category").Any((ele) => {
+                string actionName = ele.FindAttribute("name").Value.ToString();
+                return actionName == "android.intent.category.LAUNCHER";
+            });
+
+            return hasActionMain && hasLauncher;
+
         });
 
-         
+        info.LauncherActivity = launchActivity.FindAttribute("name").Value.ToString();
+        
         return info;
     }
 }
+
+
+                                                                                                                           
