@@ -22,17 +22,21 @@ public static class XElementEx
 
     public static XElement FindSingleElement(this XElement ele, string name,string namespaceName = null)
     {
-        try {
-            var ret = ele.Elements().Single((element) => {
-                if (namespaceName != null)
-                    return element.Name.LocalName == name && element.Name.NamespaceName == namespaceName;
-                else
-                    return element.Name.LocalName == name;
-            });
-            return ret;
-        } catch {
-            return null;
+
+        List<XElement> rets = new List<XElement>();
+        var elements = ele.Elements();
+        foreach (var element in elements) {
+            if (namespaceName != null) {
+                if (element.Name.LocalName == name && element.Name.NamespaceName == namespaceName) {
+                    return element;
+                }
+            } else {
+                if (element.Name.LocalName == name) {
+                    return element;
+                }
+            }
         }
+        return null;
     }
 
     public static XElement[] FindElements(this XElement ele, string name, string namespaceName = null)

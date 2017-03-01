@@ -1,0 +1,185 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="Build">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{6ddc56cc-be46-4a9a-ae0b-d5dcd14ce4ec}</ProjectGuid>
+    <ProjectHome />
+    <StartupFile>main.py</StartupFile>
+    <SearchPath />
+    <WorkingDirectory>.</WorkingDirectory>
+    <OutputPath>.</OutputPath>
+    <ProjectTypeGuids>{888888a0-9f3d-457c-b088-3a5042f75d52}</ProjectTypeGuids>
+    <LaunchProvider>Standard Python launcher</LaunchProvider>
+    <InterpreterId>{9a7a9026-48c1-4688-9d5d-e5699d47d074}</InterpreterId>
+    <InterpreterVersion>2.7</InterpreterVersion>
+    <IsWindowsApplication>False</IsWindowsApplication>
+    <InterpreterArguments>
+    </InterpreterArguments>
+    <EnableNativeCodeDebugging>False</EnableNativeCodeDebugging>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)' == 'Debug'" />
+  <PropertyGroup Condition="'$(Configuration)' == 'Release'" />
+  <PropertyGroup>
+    <VisualStudioVersion Condition=" '$(VisualStudioVersion)' == '' ">10.0</VisualStudioVersion>
+    <PtvsTargetsFile>$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets</PtvsTargetsFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Content Include="doc\GAutomator使用说明文档.html" />
+    <Content Include="doc\image\1.gif" />
+    <Content Include="doc\image\2.gif" />
+    <Content Include="doc\image\atricle.jpg" />
+    <Content Include="doc\image\behaviour.png" />
+    <Content Include="doc\image\device_screen.png" />
+    <Content Include="doc\image\download_urllib3.png" />
+    <Content Include="doc\image\fight_random_click.png" />
+    <Content Include="doc\image\find_elements_scene.png" />
+    <Content Include="doc\image\find_elments_xml.png" />
+    <Content Include="doc\image\find_elments_xml_img.png" />
+    <Content Include="doc\image\find_elments_xml_txt.png" />
+    <Content Include="doc\image\GAutomator.png" />
+    <Content Include="doc\image\gaview.gif" />
+    <Content Include="doc\image\gaview_error1.png" />
+    <Content Include="doc\image\interaction_click.png" />
+    <Content Include="doc\image\interaction_mask.png" />
+    <Content Include="doc\image\interaction_scene.png" />
+    <Content Include="doc\image\login_step.png" />
+    <Content Include="doc\image\log_info.png" />
+    <Content Include="doc\image\portrait.png" />
+    <Content Include="doc\image\pycharm_step1.png" />
+    <Content Include="doc\image\pycharm_step2.png" />
+    <Content Include="doc\image\reporter_perform.png" />
+    <Content Include="doc\image\reporter_screen.png" />
+    <Content Include="doc\image\scene.png" />
+    <Content Include="doc\image\scene_setting.png" />
+    <Content Include="doc\image\screen_mark.jpg" />
+    <Content Include="doc\image\search.png" />
+    <Content Include="doc\image\select_section.png" />
+    <Content Include="doc\image\smcp.png" />
+    <Content Include="doc\image\step1.png" />
+    <Content Include="doc\image\step2.png" />
+    <Content Include="doc\image\step3.png" />
+    <Content Include="doc\image\tag.png" />
+    <Content Include="doc\image\urllib3_install.png" />
+    <Content Include="LICENSE.txt" />
+    <Content Include="wpyscripts\readme.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="build.py" />
+    <Compile Include="libs\imap_utf7.py" />
+    <Compile Include="libs\six.py" />
+    <Compile Include="libs\uiauto\uiautomator.py" />
+    <Compile Include="libs\uiauto\__init__.py" />
+    <Compile Include="libs\urllib3\connection.py" />
+    <Compile Include="libs\urllib3\connectionpool.py" />
+    <Compile Include="libs\urllib3\contrib\appengine.py" />
+    <Compile Include="libs\urllib3\contrib\ntlmpool.py" />
+    <Compile Include="libs\urllib3\contrib\pyopenssl.py" />
+    <Compile Include="libs\urllib3\contrib\socks.py" />
+    <Compile Include="libs\urllib3\contrib\__init__.py" />
+    <Compile Include="libs\urllib3\exceptions.py" />
+    <Compile Include="libs\urllib3\fields.py" />
+    <Compile Include="libs\urllib3\filepost.py" />
+    <Compile Include="libs\urllib3\packages\backports\makefile.py" />
+    <Compile Include="libs\urllib3\packages\backports\__init__.py" />
+    <Compile Include="libs\urllib3\packages\ordered_dict.py" />
+    <Compile Include="libs\urllib3\packages\six.py" />
+    <Compile Include="libs\urllib3\packages\ssl_match_hostname\_implementation.py" />
+    <Compile Include="libs\urllib3\packages\ssl_match_hostname\__init__.py" />
+    <Compile Include="libs\urllib3\packages\__init__.py" />
+    <Compile Include="libs\urllib3\poolmanager.py" />
+    <Compile Include="libs\urllib3\request.py" />
+    <Compile Include="libs\urllib3\response.py" />
+    <Compile Include="libs\urllib3\util\connection.py" />
+    <Compile Include="libs\urllib3\util\request.py" />
+    <Compile Include="libs\urllib3\util\response.py" />
+    <Compile Include="libs\urllib3\util\retry.py" />
+    <Compile Include="libs\urllib3\util\ssl_.py" />
+    <Compile Include="libs\urllib3\util\timeout.py" />
+    <Compile Include="libs\urllib3\util\url.py" />
+    <Compile Include="libs\urllib3\util\__init__.py" />
+    <Compile Include="libs\urllib3\_collections.py" />
+    <Compile Include="libs\urllib3\__init__.py" />
+    <Compile Include="libs\__init__.py" />
+    <Compile Include="main.py" />
+    <Compile Include="sample\devcies_tester.py" />
+    <Compile Include="sample\find_elements.py" />
+    <Compile Include="sample\interaction.py" />
+    <Compile Include="sample\joystick_tester.py" />
+    <Compile Include="sample\reporter_tester.py" />
+    <Compile Include="sample\sample.py" />
+    <Compile Include="sample\travel_tester.py" />
+    <Compile Include="sample\__init__.py" />
+    <Compile Include="testcase\runner.py" />
+    <Compile Include="testcase\tools.py" />
+    <Compile Include="testcase\__init__.py" />
+    <Compile Include="wpyscripts\common\adb_process.py" />
+    <Compile Include="wpyscripts\common\platform_helper.py" />
+    <Compile Include="wpyscripts\common\protocol.py" />
+    <Compile Include="wpyscripts\common\socket_client.py" />
+    <Compile Include="wpyscripts\common\utils.py" />
+    <Compile Include="wpyscripts\common\wetest_exceptions.py" />
+    <Compile Include="wpyscripts\common\__init__.py" />
+    <Compile Include="wpyscripts\httptools\command.py" />
+    <Compile Include="wpyscripts\httptools\errorhandler.py" />
+    <Compile Include="wpyscripts\httptools\exceptions.py" />
+    <Compile Include="wpyscripts\httptools\remote_connection.py" />
+    <Compile Include="wpyscripts\httptools\utils.py" />
+    <Compile Include="wpyscripts\httptools\__init__.py" />
+    <Compile Include="wpyscripts\manager.py" />
+    <Compile Include="wpyscripts\test\cloud_devices_test.py" />
+    <Compile Include="wpyscripts\test\game_engine_ngui_test.py" />
+    <Compile Include="wpyscripts\test\game_engine_test.py" />
+    <Compile Include="wpyscripts\test\login_test.py" />
+    <Compile Include="wpyscripts\test\native_devices_test.py" />
+    <Compile Include="wpyscripts\test\reporter_test.py" />
+    <Compile Include="wpyscripts\test\test.py" />
+    <Compile Include="wpyscripts\test\__init__.py" />
+    <Compile Include="wpyscripts\tools\baisc_operater.py" />
+    <Compile Include="wpyscripts\tools\traverse\graph.py" />
+    <Compile Include="wpyscripts\tools\traverse\layerelem.py" />
+    <Compile Include="wpyscripts\tools\traverse\qqwx.py" />
+    <Compile Include="wpyscripts\tools\traverse\travel.py" />
+    <Compile Include="wpyscripts\tools\traverse\util.py" />
+    <Compile Include="wpyscripts\tools\traverse\__init__.py" />
+    <Compile Include="wpyscripts\tools\__init__.py" />
+    <Compile Include="wpyscripts\uiautomator\accout_handler.py" />
+    <Compile Include="wpyscripts\uiautomator\login_getter.py" />
+    <Compile Include="wpyscripts\uiautomator\login_tencent.py" />
+    <Compile Include="wpyscripts\uiautomator\uiautomator_manager.py" />
+    <Compile Include="wpyscripts\uiautomator\__init__.py" />
+    <Compile Include="wpyscripts\wetest\device.py" />
+    <Compile Include="wpyscripts\wetest\element.py" />
+    <Compile Include="wpyscripts\wetest\engine.py" />
+    <Compile Include="wpyscripts\wetest\reporter.py" />
+    <Compile Include="wpyscripts\wetest\__init__.py" />
+    <Compile Include="wpyscripts\__init__.py" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="doc" />
+    <Folder Include="doc\image" />
+    <Folder Include="libs" />
+    <Folder Include="libs\uiauto" />
+    <Folder Include="libs\urllib3" />
+    <Folder Include="libs\urllib3\contrib" />
+    <Folder Include="libs\urllib3\packages" />
+    <Folder Include="libs\urllib3\packages\backports" />
+    <Folder Include="libs\urllib3\packages\ssl_match_hostname" />
+    <Folder Include="libs\urllib3\util" />
+    <Folder Include="sample" />
+    <Folder Include="testcase" />
+    <Folder Include="wpyscripts" />
+    <Folder Include="wpyscripts\common" />
+    <Folder Include="wpyscripts\httptools" />
+    <Folder Include="wpyscripts\test" />
+    <Folder Include="wpyscripts\tools" />
+    <Folder Include="wpyscripts\tools\traverse" />
+    <Folder Include="wpyscripts\uiautomator" />
+    <Folder Include="wpyscripts\wetest" />
+  </ItemGroup>
+  <ItemGroup>
+    <InterpreterReference Include="{9a7a9026-48c1-4688-9d5d-e5699d47d074}\2.7" />
+  </ItemGroup>
+  <Import Project="$(PtvsTargetsFile)" Condition="Exists($(PtvsTargetsFile))" />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.Common.targets" Condition="!Exists($(PtvsTargetsFile))" />
+</Project>

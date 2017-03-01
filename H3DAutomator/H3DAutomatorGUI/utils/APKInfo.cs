@@ -15,8 +15,6 @@ class APKInfo
     public string VersionCode;
     public string LauncherActivity;
 
-
-
     public static APKInfo ParseAPK(string apkFilePath)
     {
         APKInfo info = new APKInfo();
