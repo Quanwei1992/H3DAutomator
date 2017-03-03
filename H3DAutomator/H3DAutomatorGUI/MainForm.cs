@@ -12,7 +12,7 @@ using System.IO;
 using System.Threading;
 using Managed.Adb.Exceptions;
 using Automator;
-
+using System.Configuration;
 namespace H3DAutomatorGUI
 {
     public partial class MainForm : Form
@@ -26,6 +26,14 @@ namespace H3DAutomatorGUI
 
         private void MainForm_Load(object sender, EventArgs e)
         {
+
+
+
+            // 读取配置文件
+            textBox_python.Text = Config.Read("AppSettings", "Python", "", "./config.ini");
+            textBox_wt.Text = Config.Read("AppSettings", "wetest", "", "./config.ini");
+
+
             status_lable_adb.Text = "正在初始化....";
             LogWrapper.OnRecvLog += OnRecvLog;
             DeviceManager.Instance.DeviceConnected += DeviceConnected;
@@ -124,19 +132,99 @@ namespace H3DAutomatorGUI
 
         private void button_install_Click_1(object sender, EventArgs e)
         {
-            Queue<DeviceTask> queue = new Queue<DeviceTask>();
-
-            string apkPath = "d:/wetest.apk";
-            //queue.Enqueue(new InstallTask(apkPath));
-            //APKInfo info = APKInfo.ParseAPK(apkPath);
-            //queue.Enqueue(new LaunchAppTask(info.PackgeName, info.LauncherActivity));
-            queue.Enqueue(new WeTestTask("E:/Python27/python.exe",
-                "E:/GitRepos/H3DAutomator/H3DAutomator/wetest","com.tencent.wetest.demo",
-                50032,19009));
-            var devices = DeviceManager.Instance.Devices;
-            foreach (var device in devices) {
-                device.TaskMgr.RunTasks(queue.ToArray());
+            
+          
+            button_install.Enabled = false;
+            List<DeviceTask> tasks = new List<DeviceTask>();
+            string packgeName = "";
+            if (radioButton_install.Checked) {
+                string apkFilePath = textBox_apk.Text;
+                var installTask = new InstallTask(apkFilePath);
+                tasks.Add(installTask);
+                var info = APKInfo.ParseAPK(apkFilePath);
+                packgeName = info.PackgeName;
+            } else {
+                packgeName = textBox_apk.Text;
             }
+
+            WeTestTask wtTask = new WeTestTask(textBox_python.Text, textBox_wt.Text, packgeName);
+            tasks.Add(wtTask);
+
+            var devices = DeviceManager.Instance.Devices;
+            int complateCount = 0;
+            for (int i = 0; i < devices.Length; i++) {
+                var device = devices[i];
+                device.TaskMgr.TaskEnd += (task,result) => {
+                    if (device.TaskMgr.RunningTaskIndex == device.TaskMgr.Tasks.Length - 1 || !result.ok) {
+                        complateCount++;
+                        if (complateCount == devices.Length) {
+                            LogWrapper.LogInfo("所有任务已完成");
+                            RunInMainthread(()=> {
+                                button_install.Enabled = true;
+                            });
+                            
+                        }
+                    }
+                };
+                device.TaskMgr.RunTasks(tasks.ToArray());
+            }
+        }
+
+        private void button_python_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Filter = "exe(*.exe)|*.exe";
+            ofd.FilterIndex = 0;
+            ofd.RestoreDirectory = true;
+            if (ofd.ShowDialog() == DialogResult.OK) {
+                textBox_python.Text = ofd.FileName;
+                Config.Write("AppSettings", "Python", ofd.FileName, "./config.ini");
+            }
+        }
+
+        private void button_wt_Click(object sender, EventArgs e)
+        {
+            FolderBrowserDialog dialog = new FolderBrowserDialog();
+            dialog.Description = "请选择WeTest根目录";
+            if (dialog.ShowDialog() == DialogResult.OK) {
+                string foldPath = dialog.SelectedPath;
+                textBox_wt.Text = foldPath;
+                Config.Write("AppSettings", "wetest", foldPath, "./config.ini");
+            }
+        }
+
+        private void button_apk_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Filter = "apk(*.apk)|*.apk";
+            ofd.FilterIndex = 0;
+            ofd.RestoreDirectory = true;
+            if (ofd.ShowDialog() == DialogResult.OK) {
+                textBox_apk.Text = ofd.FileName;
+            }
+        }
+
+        private void radioButton_install_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radioButton_install.Checked) {
+                label_title.Text = "APK:";
+                textBox_apk.Enabled = false;
+                button_apk.Visible = true;
+            }
+        }
+
+        private void radioButton_onlytest_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radioButton_onlytest.Checked) {
+                label_title.Text = "BundleID";
+                textBox_apk.Enabled = true;
+                button_apk.Visible = false;
+            }
+        }
+
+        private void textBox_apk_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

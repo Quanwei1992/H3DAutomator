@@ -62,6 +62,7 @@ public class DeviceManager
                 mDeviceCache[adbDevices[i].SerialNumber] = new Automator.Device(adbDevices[i]);
             }
         }
+        
     }
 
 

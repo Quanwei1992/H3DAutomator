@@ -41,6 +41,17 @@
             this.button_install = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.textBox_log = new System.Windows.Forms.TextBox();
+            this.label_python = new System.Windows.Forms.Label();
+            this.textBox_python = new System.Windows.Forms.TextBox();
+            this.button_python = new System.Windows.Forms.Button();
+            this.label_wt = new System.Windows.Forms.Label();
+            this.textBox_wt = new System.Windows.Forms.TextBox();
+            this.button_wt = new System.Windows.Forms.Button();
+            this.radioButton_install = new System.Windows.Forms.RadioButton();
+            this.radioButton_onlytest = new System.Windows.Forms.RadioButton();
+            this.label_title = new System.Windows.Forms.Label();
+            this.textBox_apk = new System.Windows.Forms.TextBox();
+            this.button_apk = new System.Windows.Forms.Button();
             this.statusStrip_adb.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -116,6 +127,17 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.label_title);
+            this.tabPage1.Controls.Add(this.radioButton_onlytest);
+            this.tabPage1.Controls.Add(this.radioButton_install);
+            this.tabPage1.Controls.Add(this.button_apk);
+            this.tabPage1.Controls.Add(this.button_wt);
+            this.tabPage1.Controls.Add(this.textBox_apk);
+            this.tabPage1.Controls.Add(this.textBox_wt);
+            this.tabPage1.Controls.Add(this.button_python);
+            this.tabPage1.Controls.Add(this.label_wt);
+            this.tabPage1.Controls.Add(this.textBox_python);
+            this.tabPage1.Controls.Add(this.label_python);
             this.tabPage1.Controls.Add(this.button_install);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
@@ -160,6 +182,115 @@
             this.textBox_log.TabIndex = 7;
             this.textBox_log.TextChanged += new System.EventHandler(this.textBox_log_TextChanged);
             // 
+            // label_python
+            // 
+            this.label_python.AutoSize = true;
+            this.label_python.Location = new System.Drawing.Point(7, 12);
+            this.label_python.Name = "label_python";
+            this.label_python.Size = new System.Drawing.Size(47, 12);
+            this.label_python.TabIndex = 5;
+            this.label_python.Text = "Python:";
+            // 
+            // textBox_python
+            // 
+            this.textBox_python.Enabled = false;
+            this.textBox_python.Location = new System.Drawing.Point(61, 7);
+            this.textBox_python.Name = "textBox_python";
+            this.textBox_python.Size = new System.Drawing.Size(218, 21);
+            this.textBox_python.TabIndex = 6;
+            this.textBox_python.Text = "E:/Python27/python.exe";
+            // 
+            // button_python
+            // 
+            this.button_python.Location = new System.Drawing.Point(289, 7);
+            this.button_python.Name = "button_python";
+            this.button_python.Size = new System.Drawing.Size(45, 23);
+            this.button_python.TabIndex = 7;
+            this.button_python.Text = "...";
+            this.button_python.UseVisualStyleBackColor = true;
+            this.button_python.Click += new System.EventHandler(this.button_python_Click);
+            // 
+            // label_wt
+            // 
+            this.label_wt.AutoSize = true;
+            this.label_wt.Location = new System.Drawing.Point(7, 41);
+            this.label_wt.Name = "label_wt";
+            this.label_wt.Size = new System.Drawing.Size(41, 12);
+            this.label_wt.TabIndex = 5;
+            this.label_wt.Text = "WeTest";
+            // 
+            // textBox_wt
+            // 
+            this.textBox_wt.Enabled = false;
+            this.textBox_wt.Location = new System.Drawing.Point(61, 36);
+            this.textBox_wt.Name = "textBox_wt";
+            this.textBox_wt.Size = new System.Drawing.Size(218, 21);
+            this.textBox_wt.TabIndex = 6;
+            this.textBox_wt.Text = "E:/GitRepos/H3DAutomator/H3DAutomator/wetest";
+            // 
+            // button_wt
+            // 
+            this.button_wt.Location = new System.Drawing.Point(289, 36);
+            this.button_wt.Name = "button_wt";
+            this.button_wt.Size = new System.Drawing.Size(45, 23);
+            this.button_wt.TabIndex = 7;
+            this.button_wt.Text = "...";
+            this.button_wt.UseVisualStyleBackColor = true;
+            this.button_wt.Click += new System.EventHandler(this.button_wt_Click);
+            // 
+            // radioButton_install
+            // 
+            this.radioButton_install.AutoSize = true;
+            this.radioButton_install.Checked = true;
+            this.radioButton_install.Location = new System.Drawing.Point(20, 73);
+            this.radioButton_install.Name = "radioButton_install";
+            this.radioButton_install.Size = new System.Drawing.Size(77, 16);
+            this.radioButton_install.TabIndex = 8;
+            this.radioButton_install.TabStop = true;
+            this.radioButton_install.Text = "安装+测试";
+            this.radioButton_install.UseVisualStyleBackColor = true;
+            this.radioButton_install.CheckedChanged += new System.EventHandler(this.radioButton_install_CheckedChanged);
+            // 
+            // radioButton_onlytest
+            // 
+            this.radioButton_onlytest.AutoSize = true;
+            this.radioButton_onlytest.Location = new System.Drawing.Point(118, 73);
+            this.radioButton_onlytest.Name = "radioButton_onlytest";
+            this.radioButton_onlytest.Size = new System.Drawing.Size(59, 16);
+            this.radioButton_onlytest.TabIndex = 9;
+            this.radioButton_onlytest.Text = "仅测试";
+            this.radioButton_onlytest.UseVisualStyleBackColor = true;
+            this.radioButton_onlytest.CheckedChanged += new System.EventHandler(this.radioButton_onlytest_CheckedChanged);
+            // 
+            // label_title
+            // 
+            this.label_title.AutoSize = true;
+            this.label_title.Location = new System.Drawing.Point(4, 104);
+            this.label_title.Name = "label_title";
+            this.label_title.Size = new System.Drawing.Size(23, 12);
+            this.label_title.TabIndex = 10;
+            this.label_title.Text = "APK";
+            this.label_title.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // textBox_apk
+            // 
+            this.textBox_apk.Enabled = false;
+            this.textBox_apk.Location = new System.Drawing.Point(61, 99);
+            this.textBox_apk.Name = "textBox_apk";
+            this.textBox_apk.Size = new System.Drawing.Size(218, 21);
+            this.textBox_apk.TabIndex = 6;
+            this.textBox_apk.TextChanged += new System.EventHandler(this.textBox_apk_TextChanged);
+            // 
+            // button_apk
+            // 
+            this.button_apk.Location = new System.Drawing.Point(289, 97);
+            this.button_apk.Name = "button_apk";
+            this.button_apk.Size = new System.Drawing.Size(45, 23);
+            this.button_apk.TabIndex = 7;
+            this.button_apk.Text = "...";
+            this.button_apk.UseVisualStyleBackColor = true;
+            this.button_apk.Click += new System.EventHandler(this.button_apk_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -176,6 +307,7 @@
             this.statusStrip_adb.PerformLayout();
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
+            this.tabPage1.PerformLayout();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
             this.ResumeLayout(false);
@@ -198,6 +330,17 @@
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.Button button_install;
         private System.Windows.Forms.TextBox textBox_log;
+        private System.Windows.Forms.Button button_python;
+        private System.Windows.Forms.TextBox textBox_python;
+        private System.Windows.Forms.Label label_python;
+        private System.Windows.Forms.Button button_wt;
+        private System.Windows.Forms.TextBox textBox_wt;
+        private System.Windows.Forms.Label label_wt;
+        private System.Windows.Forms.RadioButton radioButton_onlytest;
+        private System.Windows.Forms.RadioButton radioButton_install;
+        private System.Windows.Forms.Label label_title;
+        private System.Windows.Forms.Button button_apk;
+        private System.Windows.Forms.TextBox textBox_apk;
     }
 }
 

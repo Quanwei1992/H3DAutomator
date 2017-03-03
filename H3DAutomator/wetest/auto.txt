@@ -1,0 +1,7 @@
+click,/Canvas/Panel/Sample
+click,/Canvas/Panel/Sample
+click,/Canvas/Panel/Sample
+click,/Canvas/Panel/Sample
+click,/Canvas/Panel/Sample
+wait,1
+click,/Canvas/Panel/FindElements

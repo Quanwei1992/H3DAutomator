@@ -1,4 +1,5 @@
-﻿using Managed.Adb;
+﻿using Automator;
+using Managed.Adb;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,8 +17,7 @@ namespace Automator
 
     public abstract class DeviceTask
     {
-        public Managed.Adb.Device ADBDevice;
-        public abstract TaskResult Run();
+        public abstract TaskResult Run(Managed.Adb.Device adbDevice);
     }
 
 }

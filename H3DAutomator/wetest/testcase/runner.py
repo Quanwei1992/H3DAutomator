@@ -10,6 +10,9 @@ Unless required by applicable law or agreed to in writing, software distributed 
 __author__ = 'minhuaxu wukenaihesos@gmail.com'
 
 import os
+import random
+import string
+import datetime
 from wpyscripts.tools.baisc_operater import *
 import wpyscripts.tools.traverse.travel as travel
 
@@ -41,13 +44,51 @@ def random_search_test():
     travel.explore(log_dir, [], mode=0, max_num=3000)
 
 
+
+
+
+
+def handle_cmd_click(path):
+    btn = find_elment_wait(path)
+    bound=engine.get_element_bound(btn)
+    engine.click(bound)
+
+def handle_cmd_wait(sec):
+    time.sleep(string.atof(sec))
+
+
+
+def dispath_cmd(cmd,param):
+    if(cmd == "click"):
+        handle_cmd_click(param)
+    if(cmd == "wait"):
+        handle_cmd_wait(param)
+
+
+def test_excute_autotest_script():
+    f = open("auto.txt",'r')
+    for line in f:
+        line=line.strip('\n')
+        print "excute" + line
+        args = line.split(',')
+        if(len(args) == 2):
+            cmd_name = args[0]
+            cmd_param = args[1]
+            print "CMD Name:" + cmd_name
+            print "CMD Param:" + cmd_param
+            dispath_cmd(cmd_name,cmd_param)
+
+
+
+
 def run():
     """
         业务逻辑的起点
     """
     try:
         #random_search_test()
-        logger.info("hello,world")
+        logger.info("=====================================================================")
+        test_excute_autotest_script()
         pass
     except Exception as e:
         traceback.print_exc()

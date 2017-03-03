@@ -18,14 +18,31 @@ namespace Automator
             mPackgeLocation = packgeLocation;
         }
 
-        public override TaskResult Run()
+        public override TaskResult Run(Managed.Adb.Device adbDevice)
         {
-
             TaskResult result = new TaskResult();
-            string remoteFilePath = ADBDevice.SyncPackageToDevice(mPackgeLocation);
+
+            //un install
+            var apkInfo = APKInfo.ParseAPK(mPackgeLocation);
+            try {
+                if (adbDevice.PackageManager.Exists(apkInfo.PackgeName)) {
+                    adbDevice.UninstallPackage(apkInfo.PackgeName);
+                }
+                
+            } catch {
+
+            }
+
+            LogWrapper.LogInfo("CanuSU:" + adbDevice.SerialNumber + ":" + adbDevice.CanSU());
+            string remoteFilePath = adbDevice.SyncPackageToDevice(mPackgeLocation);
             InstallReceiver receiver = new InstallReceiver();
             String cmd = String.Format("pm install {1}{0}", remoteFilePath, true ? "-r " : String.Empty);
-            ADBDevice.ExecuteShellCommand(cmd, receiver);
+            if (adbDevice.CanSU()) {
+                adbDevice.ExecuteRootShellCommand(cmd, receiver);
+            } else {
+                adbDevice.ExecuteShellCommand(cmd,receiver);
+            }
+
             if (!String.IsNullOrEmpty(receiver.ErrorMessage)) {
                 result.ok = false;
                 result.Msg = receiver.ErrorMessage;

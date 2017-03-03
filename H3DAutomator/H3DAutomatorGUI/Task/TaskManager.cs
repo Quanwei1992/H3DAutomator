@@ -61,18 +61,18 @@ namespace Automator
         {
             for (int i = 0; i < mDeviceTasks.Length; i++) {
                 mCurrentTaskIndex = i;
-                mDeviceTasks[i].ADBDevice = mDevice;
                 TaskStart?.Invoke(mDeviceTasks[i]);
                 LogWrapper.LogInfoFormat("设备[{0}] 开始任务 {1}/{2} {3}",mDevice.SerialNumber,
-                    i,mDeviceTasks.Length,mDeviceTasks[i].ToString());
-                var result = mDeviceTasks[i].Run();
+                    i+1,mDeviceTasks.Length,mDeviceTasks[i].ToString());
+                var result = mDeviceTasks[i].Run(mDevice);
                 TaskEnd?.Invoke(mDeviceTasks[i],result);
                 if (!result.ok) {
                     LogWrapper.LogInfoFormat("设备[{0}] 执行任务失败 {1}/{2} {3} 错误信息:{4}", mDevice.SerialNumber,
-                        i, mDeviceTasks.Length, mDeviceTasks[i].ToString(), result.Msg);
+                        i+1, mDeviceTasks.Length, mDeviceTasks[i].ToString(), result.Msg);
+                    break;
                 } else {
                     LogWrapper.LogInfoFormat("设备[{0}] 完成任务 {1}/{2} {3}",mDevice.SerialNumber,
-                    i,mDeviceTasks.Length,mDeviceTasks[i].ToString());
+                    i+1,mDeviceTasks.Length,mDeviceTasks[i].ToString());
                 }
             }
 

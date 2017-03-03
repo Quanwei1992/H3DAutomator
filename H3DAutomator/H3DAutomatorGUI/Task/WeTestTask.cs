@@ -21,28 +21,27 @@ namespace Automator
         private string mOtherPwd;
 
 
+        static int gEnginePort = 50031;
+        static int gUIProt = 19008;
+
         /// <summary>
         /// new WeTestTask
         /// </summary>
         /// <param name="pythonPath">python所在位置</param>
         /// <param name="wetestRootPath">wetest根目录</param>
         /// <param name="packgeName">游戏包名</param>
-        /// <param name="enginePort">与手机端的sdk服务建立网络映射，填入的为本地的网络端口号（如,50031），不同手机之间要确保不同</param>
-        /// <param name="uiPort">与手机端的UIAutomator服务建立网络映射，填入的为本地的网络端口号（如,19008），不同手机之间要确保不同</param>
         /// <param name="qqname">qq账号，每部手机应该都不一样</param>
         /// <param name="qqpwd">qq密码</param>
         /// <param name="wechataccount">微信账号</param>
         /// <param name="wechatpwd">微信密码</param>
         /// <param name="othername">其他任何账号</param>
         /// <param name="otherpwd">其他任何账号的密码</param>
-        public WeTestTask(string pythonPath,string wetestRootPath,string packgeName,int enginePort,int uiPort,
+        public WeTestTask(string pythonPath,string wetestRootPath,string packgeName,
             string qqname = null,string qqpwd = null, string wechataccount = null, string wechatpwd = null, string othername = null, string otherpwd = null)
         {
             mPythonPath = pythonPath;
             mWetestRootPath = wetestRootPath;
             mPackgeName = packgeName;
-            mEnginePort = enginePort;
-            mUIPort = uiPort;
             mQQname = qqname;
             mQQPwd = qqpwd;
             mWechatAccount = wechataccount;
@@ -52,12 +51,15 @@ namespace Automator
         }
 
 
-        public override TaskResult Run()
+        public override TaskResult Run(Managed.Adb.Device adbDevice)
         {
             TaskResult result = new TaskResult();
 
+            mEnginePort = gEnginePort++;
+            mUIPort = gUIProt++;
+
             string arg = string.Format("main.py --packge={0} --engineport={1} --uiport={2} --serial={3}",
-                mPackgeName,mEnginePort,mUIPort,ADBDevice.SerialNumber);
+                mPackgeName,mEnginePort,mUIPort,adbDevice.SerialNumber);
             
             var psi = new ProcessStartInfo();
             psi.FileName = mPythonPath;

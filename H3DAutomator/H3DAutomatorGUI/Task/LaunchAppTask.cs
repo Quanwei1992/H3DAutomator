@@ -18,12 +18,12 @@ namespace Automator
             mLaunchActivity = launchActivity;
         }
 
-        public override TaskResult Run()
+        public override TaskResult Run(Managed.Adb.Device adbDevice)
         {
             TaskResult result = new TaskResult();
             String cmd = String.Format("am start {0}/{1}",mPackgeName,mLaunchActivity);
             var receiver = new LaunchAppReceiver();
-            ADBDevice.ExecuteShellCommand(cmd, receiver);
+            adbDevice.ExecuteShellCommand(cmd, receiver);
             //if (!String.IsNullOrEmpty(receiver.ErrorMessage)) {
             //    result.ok = false;
             //    result.Msg = receiver.ErrorMessage;

@@ -16,4 +16,16 @@ namespace Automator
 
         }
     }
+
+
+
+    public class DefaultShellReceiver : MultiLineReceiver
+    {
+        protected override void ProcessNewLines(string[] lines)
+        {
+            for (int i = 0; i < lines.Length; i++) {
+                LogWrapper.LogInfo(lines[i]);
+            }
+        }
+    }
 }
