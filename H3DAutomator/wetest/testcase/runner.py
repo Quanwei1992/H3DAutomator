@@ -31,31 +31,27 @@ logger = manager.get_testcase_logger()
 #     tencent_login(scene_name="EmptyScene",login_button="/BootObj/CUIManager/Form_Login/LoginContainer/pnlMobileLogin/btnGroup/btnQQ",sleeptime=3)
 
 
-# ==========================随机遍历过程================================================
-# forbid_names = ["/ViewUIDepth_2/Canvas/ManagerInformation/Panel/JumpWindow/RightPanel/Wanjiaxinxi/ChangeServerButton",
-#                 "/ViewUIDepth_2/Canvas/ManagerInformation/Panel/JumpWindow/RightPanel/Wanjiaxinxi/LoginOutButton"]
-def random_search_test():
-    log_dir = os.environ.get("UPLOADDIR")
-    if log_dir:
-        log_dir = os.path.join(log_dir, "policy.log")
-    else:
-        log_dir = "policy.log"
-    logger.info("run random search in testcase runner")
-    travel.explore(log_dir, [], mode=0, max_num=3000)
-
-
-
-
-
 
 def handle_cmd_click(path):
-    btn = find_elment_wait(path)
-    bound=engine.get_element_bound(btn)
-    engine.click(bound)
+    print 'finding element:' + path
+    btn = find_elment_wait(path,99999999,5);
+    if(btn):
+        bound=engine.get_element_bound(btn)
+        if(bound):
+            engine.click(bound)
+        else:
+            print "get element bound failed " + path
+    else:
+        print 'no found element:' + path
 
 def handle_cmd_wait(sec):
     time.sleep(string.atof(sec))
 
+def handle_cmd_enter_inner_game(levelid):
+    print 'wait enter game...'
+    stopBtn = find_elment_wait('/GameGlobal/UI Root/UIInnerGameMainLevel/TopRight/ComStopButton/StopButton',99999999,3)
+    result = engine.call_registered_handler("EnableAutoFight", "")
+    print 'enter game,enable auto fight' + result
 
 
 def dispath_cmd(cmd,param):
@@ -63,6 +59,8 @@ def dispath_cmd(cmd,param):
         handle_cmd_click(param)
     if(cmd == "wait"):
         handle_cmd_wait(param)
+    if(cmd == 'enter_inner_game'):
+        handle_cmd_enter_inner_game(param)
 
 
 def test_excute_autotest_script():
@@ -74,8 +72,6 @@ def test_excute_autotest_script():
         if(len(args) == 2):
             cmd_name = args[0]
             cmd_param = args[1]
-            print "CMD Name:" + cmd_name
-            print "CMD Param:" + cmd_param
             dispath_cmd(cmd_name,cmd_param)
 
 

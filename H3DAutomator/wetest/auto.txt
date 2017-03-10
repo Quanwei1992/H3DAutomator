@@ -1,7 +1,4 @@
-click,/Canvas/Panel/Sample
-click,/Canvas/Panel/Sample
-click,/Canvas/Panel/Sample
-click,/Canvas/Panel/Sample
-click,/Canvas/Panel/Sample
-wait,1
-click,/Canvas/Panel/FindElements
+click,/GameGlobal/UI Root/UIMainLobby2DTest2/AnchorBottom/Window/BattleButton/ImageButton
+click,/GameGlobal/UI Root/UIChapter/Center/NormalChapterRoot/Book/Chapter_1/Content/LevelRoot/Level_1/Icon
+click,/GameGlobal/UI Root/UISelectLevel/UI_01/AnchorRight/Window/Buttons/Fight
+enter_inner_game,11111

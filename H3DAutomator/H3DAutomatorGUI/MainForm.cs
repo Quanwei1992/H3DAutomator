@@ -201,8 +201,15 @@ namespace H3DAutomatorGUI
             ofd.RestoreDirectory = true;
             if (ofd.ShowDialog() == DialogResult.OK) {
                 textBox_apk.Text = ofd.FileName;
+                if (radioButton_install.Checked) {
+                    Config.Write("AppSettings", "apk_path", ofd.FileName, "./config.ini");
+                }
             }
         }
+
+
+        bool firstSelectInstallButton = true;
+        
 
         private void radioButton_install_CheckedChanged(object sender, EventArgs e)
         {
@@ -210,8 +217,13 @@ namespace H3DAutomatorGUI
                 label_title.Text = "APK:";
                 textBox_apk.Enabled = false;
                 button_apk.Visible = true;
+                if (firstSelectInstallButton) {
+                    textBox_apk.Text = Config.Read("AppSettings", "apk_path", "", "./config.ini");
+                    firstSelectInstallButton = false;
+                }
             }
         }
+        bool firstSelectOnlyTestButton = true;
 
         private void radioButton_onlytest_CheckedChanged(object sender, EventArgs e)
         {
@@ -219,12 +231,18 @@ namespace H3DAutomatorGUI
                 label_title.Text = "BundleID";
                 textBox_apk.Enabled = true;
                 button_apk.Visible = false;
+                if (firstSelectOnlyTestButton) {
+                    textBox_apk.Text = Config.Read("AppSettings", "apk_bundle_id", "", "./config.ini");
+                    firstSelectOnlyTestButton = false;
+                }
             }
         }
 
         private void textBox_apk_TextChanged(object sender, EventArgs e)
         {
-
+            if (radioButton_onlytest.Checked) {
+                Config.Write("AppSettings", "apk_bundle_id",textBox_apk.Text, "./config.ini");
+            }
         }
     }
 }

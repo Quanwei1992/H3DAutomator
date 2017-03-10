@@ -69,9 +69,9 @@ def _native_prepare():
     
     # 本地环境准备，清楚数据，拉起游戏
     device = manager.get_device()
-    device._clear_qq_account()
+    #device._clear_qq_account()
     local_package = os.environ.get("PKGNAME", "")
-    device._clear_user_info(local_package)
+    #device._clear_user_info(local_package)
     device.launch_app(local_package)
     time.sleep(10)
     return True
@@ -139,9 +139,6 @@ def _run():
     except WeTestRuntimeError as e:
         stack = traceback.format_exc()
         logger.exception(stack)
-
-def welcome(str):
-    return str+"hello"
 
 def main():
     """
