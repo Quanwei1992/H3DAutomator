@@ -1,4 +1,11 @@
+click,/3DMapUIRoot/DragObj
 click,/GameGlobal/UI Root/UIMainLobby2DTest2/AnchorBottom/Window/BattleButton/ImageButton
 click,/GameGlobal/UI Root/UIChapter/Center/NormalChapterRoot/Book/Chapter_1/Content/LevelRoot/Level_1/Icon
 click,/GameGlobal/UI Root/UISelectLevel/UI_01/AnchorRight/Window/Buttons/Fight
-enter_inner_game,11111
+enter_inner_game,1101
+click,/GameGlobal/UI Root/UIResult/AnchorCenter/ResultPanel/3bntsRoot/SelectLevel
+click,/GameGlobal/UI Root/UIChapter/Center/NormalChapterRoot/Book/Chapter_1/Content/LevelRoot/Level_2/Icon
+click,/GameGlobal/UI Root/UISelectLevel/UI_01/AnchorRight/Window/Buttons/Fight
+enter_inner_game,1102
+click,/GameGlobal/UI Root/UIResult/AnchorCenter/ResultPanel/3bntsRoot/SelectLevel
+click,/GameGlobal/UI Root/UIChapter/Top/BackButton

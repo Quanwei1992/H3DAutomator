@@ -31,18 +31,30 @@ logger = manager.get_testcase_logger()
 #     tencent_login(scene_name="EmptyScene",login_button="/BootObj/CUIManager/Form_Login/LoginContainer/pnlMobileLogin/btnGroup/btnQQ",sleeptime=3)
 
 
+def  find_and_click(path,max_count=10, sleeptime=3):
+    element = None
+    bound = None
+    for i in range(max_count):
+        try:
+            element = engine.find_element(path)
+            if element:
+                bound = engine.get_element_bound(element)
+        except WeTestRuntimeError as e:
+            # 存在抛出异常的可能，比如说切换过程中，游戏可能并不在前台
+            logger.warn(e)
+            time.sleep(sleeptime)
+        if element and bound:
+            time.sleep(3)
+            engine.click(bound)
+            time.sleep(3)
+            return
+        else:
+            time.sleep(sleeptime)
+
 
 def handle_cmd_click(path):
     print 'finding element:' + path
-    btn = find_elment_wait(path,99999999,5);
-    if(btn):
-        bound=engine.get_element_bound(btn)
-        if(bound):
-            engine.click(bound)
-        else:
-            print "get element bound failed " + path
-    else:
-        print 'no found element:' + path
+    find_and_click(path,999999,5);
 
 def handle_cmd_wait(sec):
     time.sleep(string.atof(sec))
@@ -72,6 +84,7 @@ def test_excute_autotest_script():
         if(len(args) == 2):
             cmd_name = args[0]
             cmd_param = args[1]
+            time.sleep(1)
             dispath_cmd(cmd_name,cmd_param)
 
 

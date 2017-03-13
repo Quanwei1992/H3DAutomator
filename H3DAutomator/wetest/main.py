@@ -60,7 +60,8 @@ def _prepare_environ():
         if not env:
             # 本地环境
             if not local_package:
-                raise WeTestRuntimeError("You must set your game package name,at the top of the file")
+                os.environ["PKGNAME"] = "null"
+                #raise WeTestRuntimeError("You must set your game package name,at the top of the file")
             else:
                 os.environ["PKGNAME"] = local_package
 
